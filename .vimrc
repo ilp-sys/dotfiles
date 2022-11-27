@@ -1,7 +1,7 @@
 call plug#begin('~/.vim/plugged')
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'pbondoer/vim-42header'
-Plug 'tpope/vim-surround'
+Plug 'neovim/nvim-lspconfig'
 call plug#end()
 
 if has("syntax")
