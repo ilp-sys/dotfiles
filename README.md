@@ -1,8 +1,14 @@
 # conf
 
-## .tmux.conf
+### .tmux.conf
 
-## .vimrc
+---
 
-## init.vim
+### .vimrc
+
+---
+
+### init.vim
 `~/.config/nvim/init.vim`
+
+---
