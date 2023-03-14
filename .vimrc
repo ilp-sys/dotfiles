@@ -17,6 +17,7 @@ set shiftwidth=4
 set tabstop=4
 set ignorecase
 set hlsearch
+set is hls
 set showmatch
 set cursorline
 set laststatus=2
