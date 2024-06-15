@@ -8,6 +8,9 @@ if has("syntax")
 	syntax on
 endif
 
+syntax enable
+filetype plugin indent on
+
 set nu
 set autoindent
 set smartindent
