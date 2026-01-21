@@ -117,6 +117,17 @@ require("lazy").setup({
     event = "InsertEnter",
   },
 
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+    },
+    build = "make tiktoken",
+    opts = {
+    },
+  },
+
+
   ------------------------------------------------
   -- Treesitter
   ------------------------------------------------
@@ -125,6 +136,15 @@ require("lazy").setup({
 	dir = "~/.local/share/nvim/lazy/nvim-treesitter/",
 	lazy = false,
     build = "TSUpdate",
+  },
+
+  ------------------------------------------------
+  -- LSP
+  ------------------------------------------------
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+    end,
   },
 })
 
@@ -196,18 +216,22 @@ vim.lsp.config('pyright', {
 vim.lsp.enable('pyright')
 
 -- (lsp) gopls
-vim.lsp.config('gopls', {
-    settings = {
-        gopls = {
-            analyses = { unusedparams = true },
-            staticcheck = true,
-        },
-    },
-    root_dir = function(fname)
-        local dir = vim.fs.find({ "go.mod", ".git" }, { upward = true, path = fname })
-        return dir and dir[1] or vim.loop.cwd()
-    end,
-})
+-- vim.lsp.config('go
+--     settings = {
+--         gopls = {
+--             analyses = { unusedparams = true },
+--             staticcheck = true,
+--         },
+--     },
+--     root_dir = function(fname)
+--         local dir = vim.fs.find({ "go.mod", ".git" }, { upward = true, path = fname })
+--         return dir and dir[1] or vim.loop.cwd()
+--     end,
+-- })
 vim.lsp.enable('gopls')
+
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
 
 
