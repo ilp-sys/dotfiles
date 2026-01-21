@@ -116,6 +116,16 @@ require("lazy").setup({
     cmd = "Copilot",
     event = "InsertEnter",
   },
+
+  ------------------------------------------------
+  -- Treesitter
+  ------------------------------------------------
+  {
+    "nvim-treesitter/nvim-treesitter",
+	dir = "~/.local/share/nvim/lazy/nvim-treesitter/",
+	lazy = false,
+    build = "TSUpdate",
+  },
 })
 
 --------------------------------------------------
@@ -126,19 +136,26 @@ vim.keymap.set("n", "-", vim.cmd.Ex)
 --------------------------------------------------
 -- nvim-treesitter-setup
 --------------------------------------------------
---- Highlighting
+
+-- Highlighting:
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '<filetype>' },
+  pattern = {'go', 'c', 'cpp', 'py'}, 
   callback = function() vim.treesitter.start() end,
 })
 
--- Folds
-vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.wo[0][0].foldmethod = 'expr'
+-- Folds & Level:
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function()
+    vim.wo.foldmethod = 'expr'
+    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.opt.foldlevel = 99 
+  end,
+})
+
 
 -- Indentation
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
 
 --------------------------------------------------
 -- nvim-lspconfig
